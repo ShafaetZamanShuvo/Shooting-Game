@@ -11,12 +11,40 @@
 #include <avr/io.h>
 #include <util/delay.h>
 #include <stdlib.h>
+#include <avr/interrupt.h>
 #include "lcd.h" //Can be download from the bottom of this article
+volatile int flag = 0;
+
+ISR(INT0_vect)
+{
+	if(flag == 0) {flag = 1;}
+	else if(flag == 1) {flag = 0;}
+}
+
+void display(int flag)
+{
+	
+	//row_num = temp;
+	if(flag == 1)
+	{
+		PORTA = 0b11110000;
+		PORTB = 0b00111001;
+		_delay_ms(1000);
+		
+	}
+	else if(flag == 0)
+	{
+		PORTA = 0b01111000;
+		PORTB = 0b00111001;
+		_delay_ms(1000);
+	}
+	
+}
 
 int main(void)
 {
 	
-	DDRD = 0xFF;
+	DDRD |= 0xF0;
 	DDRC = 0xFF;
 	DDRB =0b11111111;
 	DDRA =0b11111111;
@@ -39,29 +67,25 @@ int main(void)
 		
 		_delay_ms(200);
 		
-		PORTA = 0b11110111;
-		PORTB = 0b00111001;
-		_delay_ms(100);		
-		;
-		
-		Lcd4_Set_Cursor(2,1);
+		MCUCR = MCUCR |  0b00000011;
+		GICR = (1 << INT0);
+		sei();
 		
 		
+		if(PINB7)
+		{
+			
+		}	
+		else
+		{
+			
+			PORTA = 0b11110000;
+			PORTB = 0b00111001;
+			_delay_ms(1000);
+		}	
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		display(flag);
+				
 		
 	}
 }
