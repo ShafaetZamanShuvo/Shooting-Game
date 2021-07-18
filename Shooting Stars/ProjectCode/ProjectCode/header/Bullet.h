@@ -7,9 +7,11 @@ class Bullet
 	int bulletRowPosition;
 	int bulletColPosition;
 	bool bulletIsAlive;
+	bool specialBulletIsAlive;
 	Bullet()
 	{
 		bulletIsAlive = true;
+		specialBulletIsAlive = false;
 	}
 	Bullet(int x, int y)
 	{
@@ -26,6 +28,12 @@ class Bullet
 				bulletIsAlive = false;
 			}
 		}
+	}
+	
+	void specialBulletInitialize()
+	{
+		specialBulletIsAlive = true;
+		bulletIsAlive = false;
 	}
 };
 

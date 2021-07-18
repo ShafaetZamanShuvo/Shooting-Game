@@ -134,8 +134,25 @@ void bulletRain()
 	if(enemy_bullet.bulletRowPosition ==1) {
 		enemy_bullet.bulletColPosition = rand()%17+1;
 	}
-	showLed(enemy_bullet.bulletRowPosition, enemy_bullet.bulletColPosition);
-	_delay_ms(5);
+	if (score > 5)
+	{
+		enemy_bullet.specialBulletIsAlive = true;
+		showLed(enemy_bullet.bulletRowPosition, enemy_bullet.bulletColPosition);
+		_delay_ms(5);
+		showLed(enemy_bullet.bulletRowPosition, enemy_bullet.bulletColPosition+1);
+		_delay_ms(5);
+		showLed(enemy_bullet.bulletRowPosition+1, enemy_bullet.bulletColPosition);
+		_delay_ms(5);
+		showLed(enemy_bullet.bulletRowPosition+1, enemy_bullet.bulletColPosition+1);
+		_delay_ms(5);
+	}
+	else
+	{
+		enemy_bullet.specialBulletIsAlive = false;
+		showLed(enemy_bullet.bulletRowPosition, enemy_bullet.bulletColPosition);
+		_delay_ms(5);	
+	}
+	
 	
 	if(bulletHit()) LIFE_LEFT--;
 	for(int i =1; i<=10; i++)
@@ -187,7 +204,33 @@ void fireMove()
 
 void fireBulletCollision()
 {
-	if(shafaet.fireAlive1 == true)
+	
+	
+	 if(( enemy_bullet.specialBulletIsAlive == true) && (shafaet.fireAlive1 == true || shafaet.fireAlive2 == true || shafaet.fireAlive3 == true))
+	{
+		if((shafaet.fire1.fireRowPosition == enemy_bullet.bulletRowPosition && shafaet.fire1.fireColPosition == enemy_bullet.bulletColPosition ) || (shafaet.fire1.fireRowPosition == enemy_bullet.bulletRowPosition && shafaet.fire1.fireColPosition == enemy_bullet.bulletColPosition -1 ))
+		{
+			score++;
+			enemy_bullet.bulletRowPosition = 1;
+			shafaet.fireAlive1 = false;
+			shafaet.fire1.fireIsAlive = false;
+		}
+		else if((shafaet.fire2.fireRowPosition == enemy_bullet.bulletRowPosition && shafaet.fire2.fireColPosition == enemy_bullet.bulletColPosition) || (shafaet.fire2.fireRowPosition == enemy_bullet.bulletRowPosition && shafaet.fire2.fireColPosition == enemy_bullet.bulletColPosition -1))
+		{
+			score++;
+			enemy_bullet.bulletRowPosition = 1;
+			shafaet.fireAlive2 = false;
+			shafaet.fire2.fireIsAlive = false;
+		}
+		else if((shafaet.fire3.fireRowPosition == enemy_bullet.bulletRowPosition && shafaet.fire3.fireColPosition == enemy_bullet.bulletColPosition) || (shafaet.fire3.fireRowPosition == enemy_bullet.bulletRowPosition && shafaet.fire3.fireColPosition == enemy_bullet.bulletColPosition -1))
+		{
+			score++;
+			enemy_bullet.bulletRowPosition = 1;
+			shafaet.fireAlive3 = false;
+			shafaet.fire3.fireIsAlive = false;
+		}
+	}
+	else if((shafaet.fireAlive1 == true || shafaet.fireAlive2 == true || shafaet.fireAlive3 == true))
 	{
 		if(shafaet.fire1.fireRowPosition == enemy_bullet.bulletRowPosition && shafaet.fire1.fireColPosition == enemy_bullet.bulletColPosition)
 		{
