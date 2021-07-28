@@ -21,6 +21,7 @@ class Player
 		maxFireActive = 5;
 		activeFireNumber = 0;
 		fireAlive1 = fireAlive2 = fireAlive3 = false;
+		//fire = 0;
 	}
 	Player(int x, int y)
 	{

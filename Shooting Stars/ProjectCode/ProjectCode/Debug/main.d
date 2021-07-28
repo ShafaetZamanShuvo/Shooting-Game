@@ -20,7 +20,7 @@ main.d main.o: .././main.cpp \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdarg.h \
  .././header/lcd.h .././header/player.h .././header/Fire.h \
  .././header/enemy.h .././header/fire.h .././header/bullet.h \
- .././header/constant.h
+ .././header/constant.h .././header/Bomb.h
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h:
 
@@ -73,3 +73,5 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\
 .././header/bullet.h:
 
 .././header/constant.h:
+
+.././header/Bomb.h:

@@ -3,7 +3,7 @@
 
 static int LIFE_LEFT = 5;//done
 static int PLAYER_FIRE_CALLED = 0; //done
-
+static int GAME_LEVEL = 0;
 static int GAME_SCORE = 0;
 static int count = 0;
 static int firehasCalled = 0;
